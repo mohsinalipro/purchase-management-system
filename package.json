@@ -1,0 +1,53 @@
+{
+  "name": "buyer-records-management-system",
+  "description": "A simple app to manage buyers and records",
+  "version": "0.1.0",
+  "author": {
+    "name": "Mohsin Ali"
+  },
+  "private": true,
+  "devDependencies": {
+    "electron-rebuild": "^1.8.6",
+    "foreman": "^3.0.1",
+    "react-scripts": "3.1.1"
+  },
+  "dependencies": {
+    "bulma": "^0.7.5",
+    "electron": "^6.0.8",
+    "form-serialize": "^0.7.2",
+    "knex": "^0.19.4",
+    "nedb": "^1.8.0",
+    "node-sass": "^4.12.0",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "sqlite": "^3.0.3",
+    "sqlite3": "^4.1.0"
+  },
+  "homepage": "./",
+  "main": "src/electron-starter.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "electron": "electron .",
+    "dev": "nf start -p 3000"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "build": {
+    "appId": "li.mohsina.buyer-records-management-system",
+    "productName": "Buyer Records Management System",
+    "copyright": "Copyright © 2019 Mohsin Ali"
+  }
+}
