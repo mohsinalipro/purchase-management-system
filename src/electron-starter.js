@@ -1,36 +1,31 @@
-const electron = require("electron");
-const AppDatabase = require("./data");
+const { setupMainHandler } = require("eiphop");
 
-const BUYERS_DB_NAME = require("./data/buyers.model").name;
+// utils
+const path = require("path");
+const url = require("url");
+
+// electron
+const electron = require("electron");
+const actions = require("./actions");
+
+setupMainHandler(electron, actions, true);
 
 // Module to control application life.
 const app = electron.app;
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
 
-const path = require("path");
-const url = require("url");
-
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
-const appDb = new AppDatabase();
-const ipc = electron.ipcMain;
-ipc.on("add-buyer", function(event, data) {
-  appDb.datastores[BUYERS_DB_NAME].insert(data, function(err, newDoc) {
-    if (err) {
-      event.sender.send("add-buyer:done", { result: false, error: err });
-    }
-    event.sender.send("add-buyer:done", { result: true, payload: newDoc });
-  });
-});
 
 function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
-    webPreferences: { nodeIntegration: true }
+    width: 1024,
+    height: 768,
+    webPreferences: { nodeIntegration: true },
+    icon: path.join(__dirname, "/assets/images/icon.png")
   });
 
   // and load the index.html of the app.
@@ -43,8 +38,10 @@ function createWindow() {
     });
   mainWindow.loadURL(startUrl);
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
-
+  // mainWindow.webContents.openDevTools();
+  mainWindow.webContents.on("devtools-opened", () => {
+    mainWindow.webContents.closeDevTools();
+  });
   // Emitted when the window is closed.
   mainWindow.on("closed", function() {
     // Dereference the window object, usually you would store windows

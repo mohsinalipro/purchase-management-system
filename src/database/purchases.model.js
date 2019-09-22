@@ -1,4 +1,4 @@
-module.exports = class Purchase {
+class Purchase {
   constructor(args) {
     const {
       date = null,
@@ -10,7 +10,6 @@ module.exports = class Purchase {
       amount = null,
       buyerId = null
     } = typeof args === "object" ? args : {};
-    this.id = null; // string
     this.date = date; // date
     this.truckNo = truckNo; // string
     this.receiptNo = receiptNo; // string
@@ -21,6 +20,9 @@ module.exports = class Purchase {
 
     this.buyerId = buyerId; // Buyer.id
   }
-};
+}
 
-module.exports.name = "Purchases";
+module.exports = {
+  Purchase,
+  name: "purchases"
+};

@@ -1,25 +1,34 @@
 {
-  "name": "buyer-records-management-system",
-  "description": "A simple app to manage buyers and records",
+  "appName": "Purchase Management System",
+  "name": "purchase-management-system",
+  "description": "A simple app to manage buyer and purchase records",
   "version": "0.1.0",
   "author": {
     "name": "Mohsin Ali"
   },
   "private": true,
   "devDependencies": {
+    "electron-build": "0.0.3",
+    "electron-builder": "^21.2.0",
+    "electron-packager": "^14.0.6",
     "electron-rebuild": "^1.8.6",
     "foreman": "^3.0.1",
     "react-scripts": "3.1.1"
   },
   "dependencies": {
     "bulma": "^0.7.5",
+    "date-format": "^2.1.0",
+    "eiphop": "^1.0.11",
     "electron": "^6.0.8",
+    "font-awesome": "^4.7.0",
     "form-serialize": "^0.7.2",
     "knex": "^0.19.4",
     "nedb": "^1.8.0",
     "node-sass": "^4.12.0",
     "react": "^16.9.0",
+    "react-date-picker": "^7.8.2",
     "react-dom": "^16.9.0",
+    "react-router-dom": "^5.0.1",
     "sqlite": "^3.0.3",
     "sqlite3": "^4.1.0"
   },
@@ -28,6 +37,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build-osx": "electron-packager ./src --app-version 1.0.0 --platform darwin --icon ./assets/images/icon.icns --out ./dist --overwrite",
+    "build-linux": "electron-packager ./src --app-version 1.0.0 --platform linux --icon ./assets/images/icon.png --out ./dist --overwrite",
+    "build-win32": "electron-packager ./src --app-version 1.0.0 --platform win32 --icon ./assets/images/icon.ico --out ./dist --overwrite",
+    "rebuild": "electron-rebuild -f ",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "electron": "electron .",
