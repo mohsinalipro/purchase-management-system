@@ -26,17 +26,17 @@ class Dashboard extends Component {
           </div>
           <div className="card-content">
             <div className="content">
-              <div class="tile is-ancestor has-text-centered">
-                <div class="tile is-parent has-background-primary">
-                  <article class="tile is-child box">
-                    <p class="title">{this.state.buyerCount}</p>
-                    <p class="subtitle">Total Buyers</p>
+              <div className="tile is-ancestor has-text-centered">
+                <div className="tile is-parent has-background-primary">
+                  <article className="tile is-child box">
+                    <p className="title">{this.state.buyerCount}</p>
+                    <p className="subtitle">Total Buyers</p>
                   </article>
                 </div>
-                <div class="tile is-parent has-background-info">
-                  <article class="tile is-child box">
-                    <p class="title">{this.state.purchaseCount}</p>
-                    <p class="subtitle">Total Purchases</p>
+                <div className="tile is-parent has-background-info">
+                  <article className="tile is-child box">
+                    <p className="title">{this.state.purchaseCount}</p>
+                    <p className="subtitle">Total Purchases</p>
                   </article>
                 </div>
               </div>

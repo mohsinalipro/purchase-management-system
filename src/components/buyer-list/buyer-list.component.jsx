@@ -56,7 +56,7 @@ class BuyerList extends Component {
   );
 
   renderGridItem = buyer => (
-    <div className="column">
+    <div className="column" key={buyer._id}>
       <div className="card">
         <div className="card-content has-text-centered">
           <Link to={`/buyer-profile/${buyer._id}`}>

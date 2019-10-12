@@ -22,7 +22,7 @@ let mainWindow;
 function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 1024,
+    width: 1366,
     height: 768,
     webPreferences: { nodeIntegration: true },
     icon: path.join(__dirname, "/assets/images/icon.png")
@@ -38,10 +38,10 @@ function createWindow() {
     });
   mainWindow.loadURL(startUrl);
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools();
-  mainWindow.webContents.on("devtools-opened", () => {
-    mainWindow.webContents.closeDevTools();
-  });
+  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.on("devtools-opened", () => {
+  //   mainWindow.webContents.closeDevTools();
+  // });
   // Emitted when the window is closed.
   mainWindow.on("closed", function() {
     // Dereference the window object, usually you would store windows

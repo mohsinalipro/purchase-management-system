@@ -18,3 +18,5 @@ npm-debug.log
 
 #releases
 releases
+
+/src/database/datafiles

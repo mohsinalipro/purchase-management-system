@@ -8,7 +8,7 @@ class Purchase {
       cubicFeet = null,
       rate = null,
       amount = null,
-      buyerId = null
+      buyer_id = null
     } = typeof args === "object" ? args : {};
     this.date = date; // date
     this.truckNo = truckNo; // string
@@ -18,7 +18,7 @@ class Purchase {
     this.rate = rate; // string
     this.amount = amount; // string
 
-    this.buyerId = buyerId; // Buyer.id
+    this.buyer_id = buyer_id; // Buyer.id
   }
 }
 

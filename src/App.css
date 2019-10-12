@@ -21,6 +21,9 @@ html {
 .footer {
   margin-top: -12px;
 }
+.react-date-picker__inputGroup__year {
+  min-width: 40px;
+}
 @media screen and (max-width: 768px) {
   #menu-toggle:checked + .nav-menu {
     display: block;

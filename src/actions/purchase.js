@@ -15,6 +15,35 @@ const addPurchase = (req, res) => {
     res.send({ status: true, data: newDoc });
   });
 };
+const updatePurchase = (req, res) => {
+  const { payload } = req;
+  const { _id, ...fields } = payload;
+  dbInstance.datastores[PURCHASES_DB_NAME].update(
+    { _id: _id },
+    { ...fields },
+    function(err, newDoc) {
+      if (err) {
+        return res.error({ status: false, error: error });
+      }
+      res.send({ status: true, data: newDoc });
+    }
+  );
+};
+
+const deletePurchase = (req, res) => {
+  const { payload } = req;
+  const { _id } = payload;
+  dbInstance.datastores[PURCHASES_DB_NAME].remove({ _id: _id }, function(
+    err,
+    newDoc
+  ) {
+    if (err) {
+      return res.error({ status: false, error: error });
+    }
+    res.send({ status: true, data: newDoc });
+  });
+};
+
 const getPurchasesByBuyerId = (req, res) => {
   const { payload } = req;
   dbInstance.datastores[PURCHASES_DB_NAME].find({ buyer_id: payload }, function(
@@ -45,4 +74,10 @@ const getPurchaseCount = (req, res) => {
 //   // or res.error({msg: 'failed'})
 // };
 
-module.exports = { addPurchase, getPurchasesByBuyerId, getPurchaseCount };
+module.exports = {
+  addPurchase,
+  getPurchasesByBuyerId,
+  getPurchaseCount,
+  updatePurchase,
+  deletePurchase
+};

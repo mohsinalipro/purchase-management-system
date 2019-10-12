@@ -12,18 +12,18 @@ class BuyerProfile extends Component {
   }
   renderProfile = buyer => {
     return (
-      <div class="container buyer-profile">
-        <div class="columns">
-          <div class="column label">Name</div>
-          <div class="column">{buyer.name}</div>
+      <div className="container buyer-profile">
+        <div className="columns">
+          <div className="column label">Name</div>
+          <div className="column">{buyer.name}</div>
         </div>
-        <div class="columns">
-          <div class="column label">Phone</div>
-          <div class="column">{buyer.phone}</div>
+        <div className="columns">
+          <div className="column label">Phone</div>
+          <div className="column">{buyer.phone}</div>
         </div>
-        <div class="columns">
-          <div class="column label">Company</div>
-          <div class="column">{buyer.company}</div>
+        <div className="columns">
+          <div className="column label">Company</div>
+          <div className="column">{buyer.company}</div>
         </div>
       </div>
     );
@@ -43,8 +43,8 @@ class BuyerProfile extends Component {
         </div>
         <br />
         <a onClick={() => this.props.history.goBack()}>
-          <span class="icon">
-            <i class="fa fa-arrow-left"></i>
+          <span className="icon">
+            <i className="fa fa-arrow-left"></i>
           </span>
           <span>Back to Buyers</span>
         </a>
