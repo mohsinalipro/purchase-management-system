@@ -150,6 +150,14 @@ class PurchaseList extends Component {
     );
   };
 
+  renderTotalAmount = purchaseList => {
+    let total = 0;
+    for (let purchaseItem of purchaseList) {
+      const amount = parseInt(purchaseItem.amount);
+      total += isNaN(amount) ? 0 : amount;
+    }
+    return total;
+  };
   render() {
     return (
       <React.Fragment>
@@ -240,8 +248,8 @@ class PurchaseList extends Component {
               )
             )}
           </tbody>
-          {this.state.activeAddNew && (
-            <tfoot>
+          <tfoot>
+            {this.state.activeAddNew && (
               <tr className="highlight add-new-purchase-row">
                 <AddNewPurchaseRow
                   buyer={this.state.buyer}
@@ -250,8 +258,18 @@ class PurchaseList extends Component {
                   cancel={this.state.cancel}
                 />
               </tr>
-            </tfoot>
-          )}
+            )}
+            <tr>
+              <td colSpan="7">
+                <div className="has-text-right has-text-weight-bold">
+                  Total Amount:{" "}
+                </div>
+              </td>
+              <td colSpan="2" className="has-text-weight-bold">
+                Rs. {this.renderTotalAmount(this.state.purchaseList)}
+              </td>
+            </tr>
+          </tfoot>
         </table>
         <div className="has-text-right">
           {this.state.activeAddNew ? (
