@@ -150,13 +150,18 @@ class PurchaseList extends Component {
     );
   };
 
-  renderTotalAmount = purchaseList => {
+  calcGrandTotalAmount = purchaseList => {
     let total = 0;
     for (let purchaseItem of purchaseList) {
-      const amount = parseInt(purchaseItem.amount);
-      total += isNaN(amount) ? 0 : amount;
+      total += parseFloat(this.calcTotalAmount(purchaseItem));
     }
-    return total;
+    return isNaN(total) ? 0 : total.toFixed(2);
+  };
+
+  calcTotalAmount = purchaseItem => {
+    const amount =
+      parseFloat(purchaseItem.rate) * parseFloat(purchaseItem.cubic_feet);
+    return isNaN(amount) ? 0 : amount.toFixed(2);
   };
   render() {
     return (
@@ -239,7 +244,7 @@ class PurchaseList extends Component {
                     <span>{purchaseItem.rate}</span>
                   </td>
                   <td>
-                    <span>{purchaseItem.amount}</span>
+                    <span>{this.calcTotalAmount(purchaseItem)}</span>
                   </td>
                   {!this.state.activeAddNew && (
                     <td>{this.renderOperations(purchaseItem)}</td>
@@ -266,7 +271,7 @@ class PurchaseList extends Component {
                 </div>
               </td>
               <td colSpan="2" className="has-text-weight-bold">
-                Rs. {this.renderTotalAmount(this.state.purchaseList)}
+                Rs. {this.calcGrandTotalAmount(this.state.purchaseList)}
               </td>
             </tr>
           </tfoot>
