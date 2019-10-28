@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { emit } from "eiphop";
 import dateFormat from "date-format";
 import AddNewPurchaseRow from "./add-new-purchase-row.component";
+import { renderToStaticMarkup } from "react-dom/server";
 import "./style.css";
 
 class PurchaseList extends Component {
@@ -163,28 +164,21 @@ class PurchaseList extends Component {
       parseFloat(purchaseItem.rate) * parseFloat(purchaseItem.cubic_feet);
     return isNaN(amount) ? 0 : amount.toFixed(2);
   };
-  render() {
+  renderTable = (printView = false) => {
     return (
-      <React.Fragment>
-        <h3>
-          Buyer Name:{" "}
-          <span className="has-text-link">
-            {this.state.buyer && this.state.buyer.name}
-          </span>
-        </h3>
-        <h5>Total Purchases: {this.state.purchaseList.length}</h5>
-        <table className="table is-bordered">
-          <thead>
-            <tr>
-              <th>No</th>
-              <th>Date</th>
-              <th>Truck No</th>
-              <th>Receipt No</th>
-              <th>Quality</th>
-              <th>Cubic Feet</th>
-              <th>Rate</th>
-              <th>Amount</th>
-              {!this.state.activeAddNew && (
+      <table className="table is-bordered is-fullwidth">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Date</th>
+            <th>Truck No</th>
+            <th>Receipt No</th>
+            <th>Quality</th>
+            <th>Cubic Feet</th>
+            <th>Rate</th>
+            <th>Amount</th>
+            {!printView &&
+              (!this.state.activeAddNew && (
                 <th
                   style={{
                     width: 140
@@ -192,90 +186,147 @@ class PurchaseList extends Component {
                 >
                   Operations
                 </th>
-              )}
-            </tr>
-          </thead>
-          <tbody>
-            {this.state.purchaseList.map((purchaseItem, i) =>
-              this.state.editPurchaseId === purchaseItem._id ? (
-                <tr
-                  key={purchaseItem._id}
-                  className="highlight add-new-purchase-row"
-                >
-                  <AddNewPurchaseRow
-                    buyer={this.state.buyer}
-                    itemNo={i + 1}
-                    purchaseItem={purchaseItem}
-                    handleUpdate={this.handleUpdate}
-                    cancel={this.state.cancel}
-                  />
-                  <td>{this.renderOperations(purchaseItem)}</td>
-                </tr>
-              ) : (
-                <tr
-                  key={purchaseItem._id}
-                  className={`purchase-row ${
-                    this.state.highlightPurchaseId === purchaseItem._id
-                      ? "highlight"
-                      : ""
-                  }`}
-                >
-                  <td>
-                    <span>{i + 1}</span>
-                  </td>
-                  <td>
-                    <span>
-                      {dateFormat("dd/MM/yyyy", new Date(purchaseItem.date))}
-                    </span>
-                  </td>
-                  <td>
-                    <span>{purchaseItem.truck_no}</span>
-                  </td>
-                  <td>
-                    <span>{purchaseItem.receipt_no}</span>
-                  </td>
-                  <td>
-                    <span>{purchaseItem.quality}</span>
-                  </td>
-                  <td>
-                    <span>{purchaseItem.cubic_feet}</span>
-                  </td>
-                  <td>
-                    <span>{purchaseItem.rate}</span>
-                  </td>
-                  <td>
-                    <span>{this.calcTotalAmount(purchaseItem)}</span>
-                  </td>
-                  {!this.state.activeAddNew && (
-                    <td>{this.renderOperations(purchaseItem)}</td>
-                  )}
-                </tr>
-              )
-            )}
-          </tbody>
-          <tfoot>
-            {this.state.activeAddNew && (
-              <tr className="highlight add-new-purchase-row">
+              ))}
+          </tr>
+        </thead>
+        <tbody>
+          {this.state.purchaseList.map((purchaseItem, i) =>
+            this.state.editPurchaseId === purchaseItem._id ? (
+              <tr
+                key={purchaseItem._id}
+                className="highlight add-new-purchase-row"
+              >
                 <AddNewPurchaseRow
                   buyer={this.state.buyer}
-                  itemNo={this.state.purchaseList.length + 1}
-                  handleAdd={this.handleAddNew}
+                  itemNo={i + 1}
+                  purchaseItem={purchaseItem}
+                  handleUpdate={this.handleUpdate}
                   cancel={this.state.cancel}
                 />
+                <td>{this.renderOperations(purchaseItem)}</td>
               </tr>
-            )}
-            <tr>
-              <td colSpan="7">
-                <div className="has-text-right has-text-weight-bold">
-                  Total Amount:{" "}
-                </div>
-              </td>
-              <td colSpan="2" className="has-text-weight-bold">
-                Rs. {this.calcGrandTotalAmount(this.state.purchaseList)}
-              </td>
+            ) : (
+              <tr
+                key={purchaseItem._id}
+                className={`purchase-row ${
+                  this.state.highlightPurchaseId === purchaseItem._id
+                    ? "highlight"
+                    : ""
+                }`}
+              >
+                <td>
+                  <span>{i + 1}</span>
+                </td>
+                <td>
+                  <span>
+                    {dateFormat("dd/MM/yyyy", new Date(purchaseItem.date))}
+                  </span>
+                </td>
+                <td>
+                  <span>{purchaseItem.truck_no}</span>
+                </td>
+                <td>
+                  <span>{purchaseItem.receipt_no}</span>
+                </td>
+                <td>
+                  <span>{purchaseItem.quality}</span>
+                </td>
+                <td>
+                  <span>{purchaseItem.cubic_feet}</span>
+                </td>
+                <td>
+                  <span>{purchaseItem.rate}</span>
+                </td>
+                <td>
+                  <span>{this.calcTotalAmount(purchaseItem)}</span>
+                </td>
+                {!printView &&
+                  (!this.state.activeAddNew && (
+                    <td>{this.renderOperations(purchaseItem)}</td>
+                  ))}
+              </tr>
+            )
+          )}
+        </tbody>
+        <tfoot>
+          {this.state.activeAddNew && (
+            <tr className="highlight add-new-purchase-row">
+              <AddNewPurchaseRow
+                buyer={this.state.buyer}
+                itemNo={this.state.purchaseList.length + 1}
+                handleAdd={this.handleAddNew}
+                cancel={this.state.cancel}
+              />
             </tr>
-          </tfoot>
-        </table>
+          )}
+          <tr>
+            <td colSpan="7">
+              <div className="has-text-right has-text-weight-bold">
+                Total Amount:{" "}
+              </div>
+            </td>
+            <td colSpan={!printView ? 2 : 1} className="has-text-weight-bold">
+              Rs. {this.calcGrandTotalAmount(this.state.purchaseList)}
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    );
+  };
+  modal = null;
+  print = () => {
+    this.modal = window.open("", "modal", null, true);
+    const html = this.modal.document.createElement("html");
+    const head = this.modal.document.createElement("head");
+    const styles = document.querySelectorAll("style");
+    for (let style of styles) {
+      const tmpStyle = this.modal.document.createElement("style");
+      tmpStyle.innerHTML = style.innerHTML;
+      head.append(tmpStyle);
+    }
+
+    html.append(head);
+    const body = this.modal.document.createElement("body");
+    html.style.backgroundColor = "#FFF";
+    body.style.backgroundColor = "#FFF";
+    const header = (
+      <div>
+        <h1 className="title has-text-centered">Hafiz Muhammad Arshad</h1>
+        <h2 className="subtitle has-text-centered">
+          Branch: Adda Chanab Sand, Somoria Pull, Gt Road, Ranchna Town, Lahore
+        </h2>
+      </div>
+    );
+    const content = this.renderTable(true);
+    body.innerHTML =
+      '<div style="padding: 20;">' +
+      renderToStaticMarkup(header) +
+      renderToStaticMarkup(content) +
+      "</div>";
+    html.append(body);
+    this.modal.document.write(html.innerHTML);
+    this.modal.print();
+  };
+  render() {
+    return (
+      <React.Fragment>
+        <div className="columns">
+          <div className="column">
+            <h3>
+              Buyer Name:{" "}
+              <span className="has-text-link">
+                {this.state.buyer && this.state.buyer.name}
+              </span>
+            </h3>
+          </div>
+          <div className="column is-1 has-text-right">
+            <button className="button" onClick={this.print}>
+              <i className="fa fa-print"></i>
+            </button>
+          </div>
+        </div>
+        <h5>Total Purchases: {this.state.purchaseList.length}</h5>
+        {this.renderTable()}
         <div className="has-text-right">
           {this.state.activeAddNew ? (
             <React.Fragment>

@@ -24,7 +24,7 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1366,
     height: 768,
-    webPreferences: { nodeIntegration: true },
+    webPreferences: { nodeIntegration: true, nativeWindowOpen: true },
     icon: path.join(__dirname, "/assets/images/icon.png")
   });
 

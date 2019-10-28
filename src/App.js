@@ -14,6 +14,7 @@ import AddNewPurchase from "./pages/add-new-purchase/add-new-purchase.page";
 import Header from "./components/header/header.component";
 import Sidebar from "./components/sidebar/sidebar.component";
 import "./App.css";
+import PrintPage from "./components/print-page/print-page.component";
 
 class App extends Component {
   render() {
@@ -41,6 +42,7 @@ class App extends Component {
                   exact
                   component={BuyerProfilePage}
                 />
+                <Route path="/print-page" component={PrintPage} />
                 <Route path="/" exact component={DashboardPage} />
               </Switch>
             </div>
