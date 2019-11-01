@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { appName } from "../../../package.json";
 
 export default function Header() {
@@ -28,8 +28,8 @@ export default function Header() {
         </a> */}
       </div>
 
-      {/* <div id="navbarBasicExample" className="navbar-menu">
-        <div className="navbar-start">
+      <div id="navbarBasicExample" className="navbar-menu">
+        {/* <div className="navbar-start">
           <a className="navbar-item">Home</a>
 
           <a className="navbar-item">Documentation</a>
@@ -45,19 +45,47 @@ export default function Header() {
               <a className="navbar-item">Report an issue</a>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className="navbar-end">
-          <div className="navbar-item">
+          {/* <div className="navbar-item">
             <div className="buttons">
               <a className="button is-primary">
                 <strong>Sign up</strong>
               </a>
               <a className="button is-light">Log in</a>
             </div>
-          </div>
+          </div> */}
+            <NavLink to="/" className="navbar-item">  
+                {/* <span className="icon">
+                  <i className="fa fa-home"></i>
+                </span> */}
+                Dashboard
+            </NavLink>
+
+            <div className="navbar-item has-dropdown is-hoverable">
+              <NavLink to="/buyers" className="navbar-link">  
+                  {/* <span className="icon">
+                    <i className="fa fa-users"></i>
+                  </span> */}
+                  Buyers
+              </NavLink>
+
+              <div className="navbar-dropdown">
+                <NavLink to="/new-buyer" className="navbar-item">    
+                  {/* <span className="icon">
+                    <i className="fa fa-user-plus"></i>
+                  </span> */}
+                  Add New Buyer
+                </NavLink>
+                {/* <a className="navbar-item">Jobs</a>
+                <a className="navbar-item">Contact</a>
+                <hr className="navbar-divider" />
+                <a className="navbar-item">Report an issue</a> */}
+              </div>
+            </div>
         </div>
-      </div> */}
+      </div>
     </nav>
   );
 }

@@ -22,9 +22,9 @@ class App extends Component {
       <div id="app">
         <HashRouter>
           <Header />
-          <section className="main-content columns is-fullheight">
-            <Sidebar />
-            <div className="container-fluid column is-9">
+          <section className="main-content is-fullheight">
+            {/* <Sidebar /> */}
+            <div className="container-fluid">
               <Switch>
                 <Route path="/buyers" exact component={BuyersPage} />
                 <Route path="/new-buyer" component={AddNewBuyer} />
