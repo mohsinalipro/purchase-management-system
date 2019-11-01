@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { emit } from "eiphop";
+import moment from 'moment'
+import { dateFormat } from '../../common/strings'
 import "./style.css";
 class BuyerProfile extends Component {
   state = {
@@ -11,6 +13,7 @@ class BuyerProfile extends Component {
     });
   }
   renderProfile = buyer => {
+    const momentDateCreated = moment(buyer.dateCreated);
     return (
       <div className="container buyer-profile">
         <div className="columns">
@@ -24,6 +27,10 @@ class BuyerProfile extends Component {
         <div className="columns">
           <div className="column label">Company</div>
           <div className="column">{buyer.company}</div>
+        </div>
+        <div className="columns">
+          <div className="column label">Date Created</div>
+          <div className="column">{momentDateCreated.isValid() && momentDateCreated.format(dateFormat)}</div>
         </div>
       </div>
     );

@@ -284,7 +284,20 @@ class PurchaseList extends Component {
       tmpStyle.innerHTML = style.innerHTML;
       head.append(tmpStyle);
     }
-
+    const customStyle = this.modal.document.createElement('style');
+    customStyle.innerHTML = `
+    @page {
+      size: A4;
+      margin: 0;
+    }
+    @media print {
+      html, body {
+        width: 210mm;
+        height: 297mm;
+      }
+    }
+    `;
+    head.append(customStyle);
     html.append(head);
     const body = this.modal.document.createElement("body");
     html.style.backgroundColor = "#FFF";
@@ -303,10 +316,21 @@ class PurchaseList extends Component {
       renderToStaticMarkup(header) +
       renderToStaticMarkup(content) +
       "</div>";
+      
+    // const customScript = this.modal.document.createElement('script');
+    // customScript.innerHTML = `
+    // (function() {
+    //   window.close();
+    
+    // })()
+    // `;
+    // body.append(customScript);
     html.append(body);
+    
     this.modal.document.write(html.innerHTML);
-    this.modal.print();
+    // this.modal.print();
   };
+  
   render() {
     return (
       <React.Fragment>
