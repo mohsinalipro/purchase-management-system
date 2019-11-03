@@ -21,7 +21,8 @@ class App extends Component {
     return (
       <div id="app">
         <HashRouter>
-          <Header />
+          <Route path="/" component={Header} />
+
           <section className="main-content is-fullheight">
             {/* <Sidebar /> */}
             <div className="container-fluid">

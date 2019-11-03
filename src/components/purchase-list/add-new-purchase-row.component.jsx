@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { emit } from "eiphop";
 import DatePicker from "react-date-picker";
-import dateFormat from "date-format";
 
 class AddNewPurchaseRow extends Component {
   state = {
@@ -27,6 +26,7 @@ class AddNewPurchaseRow extends Component {
     }
   }
   handleFieldChange = (name, value) => {
+    console.log({ [name]: value });
     this.setState({ [name]: value });
   };
   componentWillUnmount() {
@@ -82,13 +82,28 @@ class AddNewPurchaseRow extends Component {
           />
         </td>
         <td>
-          <input
+          {/* <input
             type="text"
             value={this.state.quality}
             onChange={e => {
               this.handleFieldChange("quality", e.target.value);
             }}
-          />
+          /> */}
+          <select
+            onChange={e => {
+              this.handleFieldChange("quality", e.target.value);
+            }}
+          >
+            <option selected disabled>
+              --SELECT--
+            </option>
+            <option>SAND L/P</option>
+            <option>CRUSH</option>
+            <option>STONES</option>
+            <option>RAVI SAND</option>
+            <option>CHANAN SAND</option>
+            <option>LAWRANCE PUR</option>
+          </select>
         </td>
         <td>
           <input

@@ -1,9 +1,11 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { appName } from "../../../package.json";
-
-export default function Header() {
-  return (
+import "./style.css";
+export default function Header(props) {
+  const isPrintPage = props.location.pathname.indexOf("/print-page") >= 0;
+  console.log(props.location);
+  return !isPrintPage ? (
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
         <Link to="/" className="navbar-item">
@@ -56,36 +58,36 @@ export default function Header() {
               <a className="button is-light">Log in</a>
             </div>
           </div> */}
-            <NavLink to="/" className="navbar-item">  
-                {/* <span className="icon">
+          <NavLink to="/" className="navbar-item">
+            {/* <span className="icon">
                   <i className="fa fa-home"></i>
                 </span> */}
-                Dashboard
-            </NavLink>
+            Dashboard
+          </NavLink>
 
-            <div className="navbar-item has-dropdown is-hoverable">
-              <NavLink to="/buyers" className="navbar-link">  
-                  {/* <span className="icon">
+          <div className="navbar-item has-dropdown is-hoverable">
+            <NavLink to="/buyers" className="navbar-link">
+              {/* <span className="icon">
                     <i className="fa fa-users"></i>
                   </span> */}
-                  Buyers
-              </NavLink>
+              Buyers
+            </NavLink>
 
-              <div className="navbar-dropdown">
-                <NavLink to="/new-buyer" className="navbar-item">    
-                  {/* <span className="icon">
+            <div className="navbar-dropdown">
+              <NavLink to="/new-buyer" className="navbar-item">
+                {/* <span className="icon">
                     <i className="fa fa-user-plus"></i>
                   </span> */}
-                  Add New Buyer
-                </NavLink>
-                {/* <a className="navbar-item">Jobs</a>
+                Add New Buyer
+              </NavLink>
+              {/* <a className="navbar-item">Jobs</a>
                 <a className="navbar-item">Contact</a>
                 <hr className="navbar-divider" />
                 <a className="navbar-item">Report an issue</a> */}
-              </div>
             </div>
+          </div>
         </div>
       </div>
     </nav>
-  );
+  ) : null;
 }

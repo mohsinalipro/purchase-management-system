@@ -48,7 +48,7 @@ class BuyerList extends Component {
   );
 
   renderGrid = () => (
-    <div className="container buyers-grid">
+    <div className="container-fluid buyers-grid">
       <div className="columns is-multiline">
         {this.state.filteredBuyers.map(this.renderGridItem)}
       </div>
@@ -69,19 +69,19 @@ class BuyerList extends Component {
           </span>
         </div>
         <footer className="card-footer is-flex">
-          <div className="card-footer-item has-background-white-ter">
-            <Link to={`/purchases/${buyer._id}`} className="has-text-dark ">
+          <div className="card-footer-item has-background-primary ">
+            <Link to={`/purchases/${buyer._id}`} className="has-text-white ">
               <span>View Purchases</span>
             </Link>
           </div>
-          <div className="card-footer-item has-background-primary">
+          {/* <div className="card-footer-item has-background-primary">
             <Link
               to={`/purchases/new/${buyer._id}`}
               className=" has-text-light"
             >
               <span>New Purchase</span>
             </Link>
-          </div>
+          </div> */}
           {/* <Link to={`/purchases/${buyer._id}`} className="button  is-info">
               <span className="icon">
                 <i className="fa fa-list-alt"></i>

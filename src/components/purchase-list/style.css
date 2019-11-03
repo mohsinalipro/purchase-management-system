@@ -9,3 +9,6 @@
   font-size: 1em;
   outline: none !important;
 }
+.table .title {
+  margin: 0 !important;
+}

@@ -1,8 +1,10 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { emit } from "eiphop";
-import dateFormat from "date-format";
 import AddNewPurchaseRow from "./add-new-purchase-row.component";
 import { renderToStaticMarkup } from "react-dom/server";
+import moment from "moment";
+import { dateFormat } from "../../common/strings";
 import "./style.css";
 
 class PurchaseList extends Component {
@@ -168,18 +170,38 @@ class PurchaseList extends Component {
     return (
       <table className="table is-bordered is-fullwidth">
         <thead>
+          {printView && (
+            <tr>
+              <th className="v-align-middle has-text-centered is-uppercase">
+                Date
+              </th>
+              <th className="v-align-middle has-text-centered">
+                {moment().format(dateFormat)}
+              </th>
+              <th className="v-align-middle" colSpan={!printView ? 6 : 5}>
+                <h1 className="title is-uppercase has-text-centered">
+                  Bismillah Plaza Askari 10 <br />
+                  Tetra
+                </h1>
+              </th>
+              <th className="v-align-middle is-uppercase has-text-centered">
+                REF: {this.state.buyer && this.state.buyer._id}
+              </th>
+            </tr>
+          )}
           <tr>
-            <th>No</th>
-            <th>Date</th>
-            <th>Truck No</th>
-            <th>Receipt No</th>
-            <th>Quality</th>
-            <th>Cubic Feet</th>
-            <th>Rate</th>
-            <th>Amount</th>
+            <th className="has-text-centered">No.</th>
+            <th className="has-text-centered">Date</th>
+            <th className="has-text-centered">Truck No</th>
+            <th className="has-text-centered">Receipt No</th>
+            <th className="has-text-centered">Quality</th>
+            <th className="has-text-centered">Cubic Feet</th>
+            <th className="has-text-centered">Rate</th>
+            <th className="has-text-centered">Amount</th>
             {!printView &&
               (!this.state.activeAddNew && (
                 <th
+                  className="has-text-centered"
                   style={{
                     width: 140
                   }}
@@ -218,9 +240,7 @@ class PurchaseList extends Component {
                   <span>{i + 1}</span>
                 </td>
                 <td>
-                  <span>
-                    {dateFormat("dd/MM/yyyy", new Date(purchaseItem.date))}
-                  </span>
+                  <span>{moment(purchaseItem.date).format(dateFormat)}</span>
                 </td>
                 <td>
                   <span>{purchaseItem.truck_no}</span>
@@ -284,7 +304,7 @@ class PurchaseList extends Component {
       tmpStyle.innerHTML = style.innerHTML;
       head.append(tmpStyle);
     }
-    const customStyle = this.modal.document.createElement('style');
+    const customStyle = this.modal.document.createElement("style");
     customStyle.innerHTML = `
     @page {
       size: A4;
@@ -316,21 +336,21 @@ class PurchaseList extends Component {
       renderToStaticMarkup(header) +
       renderToStaticMarkup(content) +
       "</div>";
-      
+
     // const customScript = this.modal.document.createElement('script');
     // customScript.innerHTML = `
     // (function() {
     //   window.close();
-    
+
     // })()
     // `;
     // body.append(customScript);
     html.append(body);
-    
+
     this.modal.document.write(html.innerHTML);
     // this.modal.print();
   };
-  
+
   render() {
     return (
       <React.Fragment>
@@ -344,9 +364,17 @@ class PurchaseList extends Component {
             </h3>
           </div>
           <div className="column is-1 has-text-right">
-            <button className="button" onClick={this.print}>
-              <i className="fa fa-print"></i>
-            </button>
+            {!this.state.editPurchaseId && (
+              <Link
+                to={{
+                  pathname: "/print-page",
+                  state: { payload: this.renderTable(true) }
+                }}
+                className="button"
+              >
+                <i className="fa fa-print"></i>
+              </Link>
+            )}
           </div>
         </div>
         <h5>Total Purchases: {this.state.purchaseList.length}</h5>

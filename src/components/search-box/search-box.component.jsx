@@ -16,10 +16,15 @@ function SearchBox(props) {
             type="search"
             name="search"
             placeholder="Search buyer by name"
+            onInput={e => {
+              if (e.target.value.length === 0) {
+                props.handleSearch("");
+              }
+            }}
           />
         </div>
         <div className="control">
-          <a className="button is-info">Search</a>
+          <button className="button is-info">Search</button>
         </div>
       </div>
     </form>

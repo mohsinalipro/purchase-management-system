@@ -26,7 +26,6 @@ class AppDatabase {
   }
 
   getDBPath(DB_NAME) {
-    console.log(DB_NAME);
     return path.join(this.DB_FILE_PATH, "/" + DB_NAME);
   }
 }

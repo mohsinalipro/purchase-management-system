@@ -24,6 +24,9 @@ html {
 .react-date-picker__inputGroup__year {
   min-width: 40px;
 }
+.v-align-middle {
+  vertical-align: middle !important;
+}
 @media screen and (max-width: 768px) {
   #menu-toggle:checked + .nav-menu {
     display: block;

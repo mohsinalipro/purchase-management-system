@@ -148,7 +148,7 @@ class AddNewPurchase extends Component {
         <div className="field">
           <label className="label">Quality</label>
           <div className="control">
-            <input
+            {/* <input
               name="quality"
               value={this.state.quality}
               onChange={e =>
@@ -158,7 +158,20 @@ class AddNewPurchase extends Component {
               type="text"
               placeholder="Quality"
               required
-            />
+            /> */}
+            <select
+              name="quality"
+              onChange={e => {
+                this.handleFieldChange(e.target.name, e.target.value);
+              }}
+            >
+              <option>SAND L/P</option>
+              <option>CRUSH</option>
+              <option>STONES</option>
+              <option>RAVI SAND</option>
+              <option>CHANAN SAND</option>
+              <option>LAWRANCE PUR</option>
+            </select>
           </div>
         </div>
         <div className="field">

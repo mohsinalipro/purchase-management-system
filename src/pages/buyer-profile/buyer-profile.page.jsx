@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { emit } from "eiphop";
-import moment from 'moment'
-import { dateFormat } from '../../common/strings'
+import moment from "moment";
+import { dateFormat } from "../../common/strings";
 import "./style.css";
 class BuyerProfile extends Component {
   state = {
@@ -30,7 +30,10 @@ class BuyerProfile extends Component {
         </div>
         <div className="columns">
           <div className="column label">Date Created</div>
-          <div className="column">{momentDateCreated.isValid() && momentDateCreated.format(dateFormat)}</div>
+          <div className="column">
+            {momentDateCreated.isValid() &&
+              momentDateCreated.format(dateFormat)}
+          </div>
         </div>
       </div>
     );
@@ -49,12 +52,12 @@ class BuyerProfile extends Component {
           </div>
         </div>
         <br />
-        <a onClick={() => this.props.history.goBack()}>
+        <button className="button" onClick={() => this.props.history.goBack()}>
           <span className="icon">
             <i className="fa fa-arrow-left"></i>
           </span>
           <span>Back to Buyers</span>
-        </a>
+        </button>
       </div>
     );
   }
