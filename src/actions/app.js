@@ -20,7 +20,8 @@ const printRawHtml = (req, res) => {
   );
   win.webContents.on("did-finish-load", () => {
     win.webContents.executeJavaScript(
-      "window.print(); setTimeout(() => window.close());"
+      // "window.print(); setTimeout(() => window.close());"
+      "setTimeout(() => {window.print(); setTimeout(() => window.close()),100}, 1000)" 
     );
     res.send({ status: true });
   });
