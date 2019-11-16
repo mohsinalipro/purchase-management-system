@@ -38,10 +38,10 @@ function createWindow() {
     });
   mainWindow.loadURL(startUrl);
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
-  // mainWindow.webContents.on("devtools-opened", () => {
-  //   mainWindow.webContents.closeDevTools();
-  // });
+ // mainWindow.webContents.openDevTools();
+   mainWindow.webContents.on("devtools-opened", () => {
+     mainWindow.webContents.closeDevTools();
+   });
   // Emitted when the window is closed.
   mainWindow.on("closed", function() {
     // Dereference the window object, usually you would store windows

@@ -17,10 +17,17 @@ const addPurchase = (req, res) => {
 };
 const updatePurchase = (req, res) => {
   const { payload } = req;
-  const { _id, ...fields } = payload;
+  ///const { _id, ...fields } = payload;
+
+  const fields = {};
+  Object.keys(payload).forEach(key => {
+    if(key !== '_id') fields[key]= payload[key];
+  });
+  
+
   dbInstance.datastores[PURCHASES_DB_NAME].update(
-    { _id: _id },
-    { ...fields },
+    fields,
+    { _id: payload._id },
     function(err, newDoc) {
       if (err) {
         return res.error({ status: false, error: error });
