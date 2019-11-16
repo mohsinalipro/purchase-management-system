@@ -9,7 +9,9 @@ const setWindowTitle = (req, res) => {
 
 const printRawHtml = (req, res) => {
   const focusedWindow = BrowserWindow.getFocusedWindow();
-  const win = new BrowserWindow({ show: false, parent: focusedWindow });
+  const win = new BrowserWindow({
+    width: 1366,
+    height: 768, show: true, parent: focusedWindow });
 
   win.loadURL(
     `data:text/html;charset=UTF-8,${encodeURIComponent(

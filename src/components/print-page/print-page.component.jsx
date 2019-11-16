@@ -22,7 +22,11 @@ export default class PrintPageComponent extends Component {
   };
   print = () => {
     const head = document.querySelector("head");
-    let html = `<head>${head.innerHTML}</head>`;
+    let styles = '';
+    document.head.querySelectorAll('style').forEach(styleElement => {
+      styles += styleElement.innerHTML + '\n';
+      })
+    let html = `<head><style type="text/css">${styles}</style></head>`;
     html += `<body>${this.printRef.current.innerHTML}</body>`;
     emit("printRawHtml", html).then(res => {
       if (res.status) {
@@ -54,7 +58,7 @@ export default class PrintPageComponent extends Component {
               <thead>
                 <tr>
                   <td className="has-text-centered">03008494903</td>
-                  <td rowspan="2" className="v-align-middle">
+                  <td rowSpan="2" className="v-align-middle">
                     <h1 className="title is-uppercase has-text-centered">
                       Hafiz Muhammad Arshad
                     </h1>
