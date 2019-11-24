@@ -4,7 +4,6 @@ import { appName } from "../../../package.json";
 import "./style.css";
 export default function Header(props) {
   const isPrintPage = props.location.pathname.indexOf("/print-page") >= 0;
-  console.log(props.location);
   return !isPrintPage ? (
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">

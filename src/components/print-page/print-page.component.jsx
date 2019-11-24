@@ -21,13 +21,8 @@ export default class PrintPageComponent extends Component {
     // this.props.history.push("/buyers");
   };
   print = () => {
-    const head = document.querySelector("head");
-    let styles = '';
-    document.head.querySelectorAll('style').forEach(styleElement => {
-      styles += styleElement.innerHTML + '\n';
-      })
-    let html = `<head></head><body>${this.printRef.current.innerHTML}</body>`;
-    emit("printRawHtml", {html, styles}).then(res => {
+     let html = `<html><head></head><body>${this.printRef.current.innerHTML}</body></html>`;
+    emit("printRawHtml", html).then(res => {
       if (res.status) {
         // this.goBack();
       }

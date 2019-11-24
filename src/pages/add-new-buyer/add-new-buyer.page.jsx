@@ -21,7 +21,7 @@ class AddNewBuyer extends Component {
       .then(res => {
         this.props.history.goBack();
       })
-      .catch(err => console.log(err));
+      .catch(err => console.trace(err));
   };
   render() {
     return (

@@ -5,7 +5,8 @@ import { dateFormat } from "../../common/strings";
 import "./style.css";
 class BuyerProfile extends Component {
   state = {
-    buyer: null
+    buyer: null,
+    editMode: false
   };
   componentDidMount() {
     emit("getBuyerById", this.props.match.params.buyer_id).then(response => {
@@ -18,15 +19,45 @@ class BuyerProfile extends Component {
       <div className="container buyer-profile">
         <div className="columns">
           <div className="column label">Name</div>
-          <div className="column">{buyer.name}</div>
+          <div className="column" onDoubleClick={() => this.setState({editMode: true})}>
+            {this.state.editMode ? <div className="control">
+                      <input
+                        className="input"
+                        type="text"
+                        name="name"
+                        placeholder="Name"
+                        defaultValue={buyer.name}
+                        required
+                      />
+                    </div> : buyer.name}</div>
         </div>
         <div className="columns">
           <div className="column label">Phone</div>
-          <div className="column">{buyer.phone}</div>
+          <div className="column" onDoubleClick={() => this.setState({editMode: true})}>
+            {this.state.editMode ? <div className="control">
+                      <input
+                        className="input"
+                        type="text"
+                        name="phone"
+                        placeholder="Phone"
+                        defaultValue={buyer.phone}
+                        required
+                      />
+                    </div> : buyer.phone}</div>
         </div>
         <div className="columns">
           <div className="column label">Company</div>
-          <div className="column">{buyer.company}</div>
+          <div className="column" onDoubleClick={() => this.setState({editMode: true})}>
+            {this.state.editMode ? <div className="control">
+                      <input
+                        className="input"
+                        type="text"
+                        name="company"
+                        placeholder="Company"
+                        defaultValue={buyer.company}
+                        required
+                      />
+                    </div> : buyer.company}</div>
         </div>
         <div className="columns">
           <div className="column label">Date Created</div>
@@ -34,6 +65,9 @@ class BuyerProfile extends Component {
             {momentDateCreated.isValid() &&
               momentDateCreated.format(dateFormat)}
           </div>
+        </div>
+        <div className="columns">
+          {this.state.editMode && <button className="button" onClick={() => this.setState({editMode: false})}>Save</button>}
         </div>
       </div>
     );

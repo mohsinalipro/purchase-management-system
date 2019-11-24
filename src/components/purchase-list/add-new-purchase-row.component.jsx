@@ -26,7 +26,6 @@ class AddNewPurchaseRow extends Component {
     }
   }
   handleFieldChange = (name, value) => {
-    console.log({ [name]: value });
     this.setState({ [name]: value });
   };
   componentWillUnmount() {
@@ -49,7 +48,6 @@ class AddNewPurchaseRow extends Component {
     }
   }
   render() {
-    console.log(this.state);
     const { itemNo } = this.props;
     return (
       <React.Fragment>

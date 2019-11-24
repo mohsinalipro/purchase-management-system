@@ -41,7 +41,6 @@ class AddNewPurchase extends Component {
     // }
   }
   handleFieldChange = (name, value) => {
-    console.log({ name, value });
     this.setState({ [name]: value });
   };
   handleSubmit = async e => {

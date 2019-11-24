@@ -58,7 +58,6 @@ class PurchaseList extends Component {
   };
 
   handleUpdate = async updatedPurchaseItem => {
-    console.log({ updatedPurchaseItem });
     const updateResponse = await emit("updatePurchase", updatedPurchaseItem);
     if (updateResponse.status) {
       this.initializeData();
