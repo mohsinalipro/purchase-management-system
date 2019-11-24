@@ -15,14 +15,15 @@ const printRawHtml = (req, res) => {
 
   win.loadURL(
     `data:text/html;charset=UTF-8,${encodeURIComponent(
-      `<html>${req.payload}</html>`
+      `<html>${req.payload.html}</html>`
     )}`
   );
   win.webContents.on("did-finish-load", () => {
+    win.webContents.insertCSS(req.payload.styles);
     win.webContents.executeJavaScript(
-      // "window.print(); setTimeout(() => window.close());"
-      "setTimeout(() => {window.print(); setTimeout(() => window.close()),100}, 1000)" 
-    );
+      "window.print(); setTimeout(() => window.close());"
+      // "setTimeout(() => {window.print(); setTimeout(() => window.close()),100}, 1000)" 
+      );
     res.send({ status: true });
   });
 };

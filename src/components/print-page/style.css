@@ -6,7 +6,7 @@
 }
 .print-header .table {
   border: 2px solid #000;
-  border-bottom: 1px solid #0000;
+  /* border-bottom: 1px solid #0000; */
 }
 .print-area .table td,
 .print-area .table th {

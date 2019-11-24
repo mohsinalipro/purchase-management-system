@@ -26,9 +26,8 @@ export default class PrintPageComponent extends Component {
     document.head.querySelectorAll('style').forEach(styleElement => {
       styles += styleElement.innerHTML + '\n';
       })
-    let html = `<head><style type="text/css">${styles}</style></head>`;
-    html += `<body>${this.printRef.current.innerHTML}</body>`;
-    emit("printRawHtml", html).then(res => {
+    let html = `<head></head><body>${this.printRef.current.innerHTML}</body>`;
+    emit("printRawHtml", {html, styles}).then(res => {
       if (res.status) {
         // this.goBack();
       }
