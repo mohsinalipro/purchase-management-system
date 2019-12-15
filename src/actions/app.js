@@ -38,7 +38,7 @@ const printRawHtml = (req, res) => {
             );
           res.send({ status: true });
         });
-    }, 1000)
+    }, 3000)
    
   
 
