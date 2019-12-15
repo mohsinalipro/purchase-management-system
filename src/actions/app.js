@@ -31,12 +31,15 @@ const printRawHtml = (req, res) => {
     // const styles = fs.readFileSync(printPageStylePath)
     // console.log(styles);
     win.webContents.insertCSS(getGlobalCSS());
-    win.webContents.executeJavaScript(
-      "window.print(); setTimeout(() => window.close());"
-      // "setTimeout(() => {window.print(); setTimeout(() => window.close()),100}, 1000)" 
-      );
-    res.send({ status: true });
-  });
+    setTimeout(() => {
+      win.webContents.executeJavaScript(
+            "window.print(); setTimeout(() => window.close());"
+            // "setTimeout(() => {window.print(); setTimeout(() => window.close()),100}, 1000)" 
+            );
+          res.send({ status: true });
+        });
+    }, 1000)
+   
   
 
 };
