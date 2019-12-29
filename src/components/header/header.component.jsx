@@ -63,28 +63,28 @@ export default function Header(props) {
                 </span> */}
             Dashboard
           </NavLink>
+          <NavLink to="/buyers" className="navbar-item">
+            Buyers
+          </NavLink>
 
-          <div className="navbar-item has-dropdown is-hoverable">
+          {/* <div className="navbar-item has-dropdown is-hoverable">
             <NavLink to="/buyers" className="navbar-link">
-              {/* <span className="icon">
-                    <i className="fa fa-users"></i>
-                  </span> */}
               Buyers
             </NavLink>
 
             <div className="navbar-dropdown">
               <NavLink to="/new-buyer" className="navbar-item">
-                {/* <span className="icon">
+                <span className="icon">
                     <i className="fa fa-user-plus"></i>
-                  </span> */}
+                  </span>
                 Add New Buyer
               </NavLink>
-              {/* <a className="navbar-item">Jobs</a>
+              <a className="navbar-item">Jobs</a>
                 <a className="navbar-item">Contact</a>
                 <hr className="navbar-divider" />
-                <a className="navbar-item">Report an issue</a> */}
+                <a className="navbar-item">Report an issue</a>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </nav>
