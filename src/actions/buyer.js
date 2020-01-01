@@ -16,9 +16,15 @@ const addBuyer = (req, res) => {
 const updateBuyer = (req, res) => {
   const { payload } = req;
 
-  const { _id, ...buyerFields } = payload;
+  // const { _id, ...buyerFields } = payload;
+  
+  const buyerFields = {};
+  Object.keys(payload).forEach(key => {
+    if(key !== '_id') buyerFields[key]= payload[key];
+  });
+  
 
-  dbInstance.datastores[BUYERS_DB_NAME].update({ _id }, buyerFields, {}, function (err, numReplaced) {
+  dbInstance.datastores[BUYERS_DB_NAME].update({ _id: payload._id }, buyerFields, {}, function (err, numReplaced) {
     // numReplaced = 1
     // The doc #3 has been replaced by { _id: 'id3', planet: 'Pluton' }
     // Note that the _id is kept unchanged, and the document has been replaced
