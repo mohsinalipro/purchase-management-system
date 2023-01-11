@@ -21,7 +21,7 @@
     "electron": "^6.0.8",
     "font-awesome": "^4.7.0",
     "form-serialize": "^0.7.2",
-    "knex": "^0.19.4",
+    "knex": "^2.4.0",
     "moment": "^2.24.0",
     "nedb": "^1.8.0",
     "node-sass": "^4.12.0",
